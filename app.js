@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const { mongoDbConnect } = require('./db/db')
+const colors = require('colors')
 require('dotenv').config()
+const transactionRoute = require('./routes/transactions')
 
 const app = express()
 
@@ -15,15 +17,12 @@ app.use(express.json())
 app.use(cors())
 
 // routes
+app.use('/api/v1', transactionRoute)
 
-app.get('/hello', (req, res) => {
-    res.send('woghohohohoohohhohoho')
-})
 
 const server = () => {
     app.listen(PORT, () => {
-
-        console.log(`successfully! connected on port ${PORT}`)
+        console.log(`successfully! connected on port ${PORT}`.bgBrightGreen)
     })
 
 }
