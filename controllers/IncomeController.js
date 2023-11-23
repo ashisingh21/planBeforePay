@@ -3,8 +3,8 @@ const IncomeModel = require('../models/IncomeModel');
 module.exports.addIncomeController = async (req, res) => {
 
     try {
-        const { title, description, amount, type, category } = req.body;
-        const date = req.body.date || new Date();
+        const { title, description, amount, date, category } = req.body;
+  
 
         if (!title || !description || !amount || !category) {
             res.status(406).send('Please fill all fields!')
@@ -15,12 +15,13 @@ module.exports.addIncomeController = async (req, res) => {
         }
 
 
-        const income = await new incomeModel({ title, description, amount, type, category, date }).save()
+        const income = await new IncomeModel({ title, description, amount,  category, date }).save()
         res.status(201).send({ success: true, message: 'Income added Successfully!', income })
     }
 
     catch (error) {
-        res.status(500).send({ error: error })
+         console.error('Error:', error);
+    res.status(500).send({ error: 'An error occurred while adding income.' });
     }
 }
 
