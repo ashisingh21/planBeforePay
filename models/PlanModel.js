@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const Schema = mongoose.Schema
 
 const PlanModel = new mongoose.Schema({
 goal:{
@@ -14,10 +14,10 @@ budget:{
     type:Number,
     required:true
 },
-category:{
+categories:[{
     type: Schema.Types.ObjectId,
     ref: 'Category'
-},
+}],
 })
 
 module.exports =  mongoose.model('plan',PlanModel)

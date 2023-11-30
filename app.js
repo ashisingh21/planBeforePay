@@ -5,6 +5,8 @@ const colors = require('colors')
 require('dotenv').config()
 const transactionRoute = require('./routes/transactions')
 
+const planRoute = require('./routes/plan')
+
 const app = express()
 
 
@@ -18,6 +20,9 @@ app.use(cors())
 
 // routes
 app.use('/api/v1', transactionRoute)
+
+app.use('/api/v1/plan', planRoute)
+
 
 
 const server = () => {
