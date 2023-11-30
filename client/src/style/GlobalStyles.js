@@ -22,6 +22,6 @@ body{
     font-family: 'Nunito', sans-serif;
     font-size: clamp(1rem,2.5vw,1.2rem);
     overflow:hidden;
-    color:rgba(34,34,34,.6);
+    color:rgba(34,34,34);
 }
 `;

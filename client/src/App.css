@@ -1,8 +1,11 @@
-input,textarea{
-    padding: 8px;
+input,textarea,select{
+    padding: 4px;
     border: 1px solid lightgray;
     width: 100%;
     border-radius: 6px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+
 }
 
 input[type="submit"]{
@@ -15,14 +18,25 @@ input[type="submit"]{
 
 .income-content{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
     column-gap: 20px;
+    padding-top: 20px;
+}
+.income-content > div {
+    border: 1px solid lightgray;
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.form-container label{
+    font-size:1.1rem
 }
 
 .transaction-container {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid rgb(191, 191, 191);
+    position: relative;
 }
 .transaction-container:not(:last-of-type){
 margin-bottom: 14px;
@@ -32,6 +46,19 @@ margin-bottom: 14px;
     font-weight: 900;
 
 }
-.transaction-container .description {
+.transaction-container .text-sm {
     font-size:13px
 }
+
+.transaction-container .text-sm.type {
+
+    position: absolute;
+    padding: 2px 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+}
+

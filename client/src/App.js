@@ -7,8 +7,8 @@ import useWindowSize from './utils/useWindowSize';
 import { useEffect, useState, useMemo } from 'react';
 import Navigation from './Navigation/Navigation';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Income from './Components/Income/Income';
-import Expense from './Components/Expense/Expense';
+import Transactions from './Components/Transaction/Transaction';
+import AddTransaction from './Components/Transaction/AddTransaction';
 
 function App() {
   const [active, setActive] = useState(1)
@@ -19,13 +19,11 @@ function App() {
   const displayData = () => {
     switch (active) {
       case 1:
-        return <Dashboard />
+        return <Transactions />
       case 2:
-        return <Dashboard />
+        return <AddTransaction />
       case 3:
-        return <Income />
-      case 4:
-        return <Expense />
+        return <Transactions />
       default:
         return <Dashboard />
     }

@@ -1,20 +1,22 @@
-const { addExpanseController, getExpanseController, deleteExpanseController } = require('../controllers/ExpanseController')
-const { addIncomeController, getIncomeController, deleteIncomeController } = require('../controllers/IncomeController')
+const { addTransactionController, getTransactionController, deleteTransactionController, updateTransactionController } = require('../controllers/TransactionController')
 
 const router = require('express').Router()
 
 // incomes
-router.post('/add-income', addIncomeController)
+router.post('/add-transaction', addTransactionController)
 
-router.get('/all-income', getIncomeController)
+router.get('/all-transaction', getTransactionController)
 
-router.delete('/delete-income/:id', deleteIncomeController)
+router.delete('/delete-transaction/:id', deleteTransactionController)
 
-// expanse
-router.post('/add-expanse', addExpanseController)
+router.put('/update-transaction/:id', updateTransactionController)
 
-router.get('/all-expanse', getExpanseController)
+// // expanse
+// router.post('/add-expanse', addExpanseController)
 
-router.delete('/delete-expanse/:id', deleteExpanseController)
+// router.get('/all-expanse', getExpanseController)
+
+// router.delete('/delete-expanse/:id', deleteExpanseController)
+
 
 module.exports = router
