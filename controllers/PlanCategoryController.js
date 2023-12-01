@@ -13,9 +13,9 @@ module.exports.addPlanCategoryController = async (req,res)=>{
 
 module.exports.UpdatePlanCategoryController = async (req,res)=>{
  try {
-    const {name,amount,id}= req.body;
+    const {name,amount}= req.body;
     const updatedCategory = {name,amount}
-    const category = await CategoryModel.findByIdAndUpdate(_id=id,updatedCategory,{new:true})
+    const category = await CategoryModel.findByIdAndUpdate(req.params.id,updatedCategory,{new:true})
      res.status(200).send({success:true,message:'Category updated successfully!',category})
     } catch (error) {
         res.status(500).send({'error':error})
@@ -35,7 +35,7 @@ module.exports.AllPlanCategoryController = async (req,res)=>{
 
 module.exports.deletePlanCategoryController = async (req,res)=>{
  try {
-    const {id}= req.body;
+    const {id}= req.params;
     const category = await CategoryModel.findByIdAndDelete(id);
      res.status(200).send({success:true,message:'Category deleted successfully!',category})
     } catch (error) {
