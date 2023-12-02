@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import avatar from '../images/avatar.png'
 import { MenuItems } from '../utils/MenuItems'
@@ -20,11 +21,13 @@ const Navigation = ({ active, setActive }) => {
 
                         return <li
                             key={item.id}
-                            onClick={() => setActive(item.id)}
+                           
                             className={active === item.id ? 'active' : ''}
                         >
-                            {item.icon}
+                            <Link to={`/${item.link}`}  onClick={() => setActive(item.id)}>{item.icon}
                             <span>{item.title}</span>
+                            </Link>
+                            
                         </li>
                     })
                 }
@@ -84,12 +87,20 @@ const NavStyled = styled.nav`
             grid-template-columns: 40px auto;
             align-items: center;
             margin: .6rem 0;
-            font-weight: 500;
+           
             cursor: pointer;
             transition: all .4s ease-in-out;
-            color: rgba(34, 34, 96, .6);
+            
             padding-left: 1rem;
             position: relative;
+            a{
+                     display: grid;
+            grid-template-columns: 40px auto;
+              font-weight: 500;
+              color: rgba(34, 34, 96, .6);
+               font-size: 1rem;
+               text-decoration:none;
+            }
             i{
                 color: rgba(34, 34, 96, 0.6);
                 font-size: 1.4rem;
