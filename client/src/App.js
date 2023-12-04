@@ -9,9 +9,13 @@ import { useEffect, useState, useMemo } from 'react';
 import Navigation from './Navigation/Navigation';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Transaction from './Pages/Transaction/Transaction';
+import AddTransaction from './Pages/Transaction/AddTransaction';
 import Income from './Pages/Income/Income';
 import Expense from './Pages/Expense/Expense';
 import Loader from './Components/Loader';
+import Plan from './Pages/Plan/Plan';
+import AddPlan from './Pages/Plan/AddPlan';
+import Saving from './Pages/Saving/Saving';
 
 function App() {
   const [active, setActive] = useState(1)
@@ -35,30 +39,32 @@ function App() {
   // }
 
   return (
-     <Router>
+    <Router>
       <div className="app">
-        {orbMemo}
+        {/* {orbMemo} */}
         <MainLayout>
           <Navigation active={active} setActive={setActive} />
-          <main>
-            <InnerLayout>
-            
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/transaction" element={<Transaction />} />
-                {/* <Route path="/income" element={<Income />} /> */}
-                <Route path="/income" element={<Income />} />
-                <Route path="/expense" element={<Expense />} />
-                <Route path="/transaction" element={<Transaction />} />
-                <Route path="/transaction" element={<Transaction />} />
-          
-              </Routes>
-            </InnerLayout>
+          <main style={{ flex: "1" }}>
+
+
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/transaction" element={<Transaction />} />
+              {/* <Route path="/income" element={<Income />} /> */}
+              <Route path="/income" element={<Income />} />
+              <Route path="/expense" element={<Expense />} />
+              <Route path="/transaction/add-transaction" element={<AddTransaction />} />
+              <Route path="/plan" element={<Plan />} />
+              <Route path="/plan/add-plan" element={<AddPlan />} />
+              <Route path="/saving" element={<Saving />} />
+
+            </Routes>
+
           </main>
         </MainLayout>
       </div>
     </Router>
-  
+
   );
 }
 
