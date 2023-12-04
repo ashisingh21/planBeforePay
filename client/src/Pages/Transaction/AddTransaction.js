@@ -2,19 +2,55 @@ import React, { useEffect, useState } from 'react'
 import { InnerLayout } from '../../style/Layout'
 import styled from 'styled-components'
 import axios from 'axios'
-import {comment, trash} from '../../utils/Icons'
+import { comment, trash } from '../../utils/Icons'
 import "toastify-js/src/toastify.css"
 import Toastify from 'toastify-js'
 import TransactionItem from './TransactionItem'
+import { useNavigate } from 'react-router-dom'
+import { useTransaction } from '../../context/AllTransaction'
 
 const Income = () => {
-    
-    
+
+    const navigate = useNavigate()
+
     var api = 'http://localhost:8080'
 
-    const [transaction, setTransaction] = useState({ title: '', amount: '', category: '',type: '', description: '', date: '' })
-    const [allTransaction, setAllTransaction] = useState([])
+    const [transaction, setTransaction] = useState({ title: '', amount: '', category: '', type: '', description: '', date: '' })
+    const { fetchAllTransaction } = useTransaction()
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(transaction)
+        const res = await axios.post(`${api}/api/v1/add-transaction`, {
+            title: transaction.title,
+            description: transaction.description,
+            category: transaction.category,
+            type: transaction.type,
+            amount: transaction.amount,
+            date: transaction.date
+        })
+        if (res.data.success) {
+            fetchAllTransaction()
+
+            setTransaction({ title: '', amount: '', category: '', type: '', description: '', date: '' })
+            Toastify({
+                text: `${transaction.type} Added Successfully!!!`,
+                duration: 1500,
+
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                },
+
+            }).showToast();
+
+            navigate('/transaction')
+
+
+
+
+        }
+    }
 
 
     const handleChange = (e) => {
@@ -24,90 +60,12 @@ const Income = () => {
     }
 
 
-    
-
-    
-
-    const fetchAllTransaction = async () => {
-     
-        const res = await axios.get(`${api}/api/v1/all-transaction`)
-        if (res.data.success) {
-
-            setAllTransaction(res.data.allTransaction)
-        }
-    }
-
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(transaction)
-        const res = await axios.post(`${api}/api/v1/add-transaction`,{
-           title:transaction.title,
-           description:transaction.description,
-           category:transaction.category,
-            type:transaction.type,
-           amount:transaction.amount,
-           date:transaction.date
-        })
-        if (res.data.success) {
-              fetchAllTransaction()
-
-              setTransaction({title: '', amount: '', category: '',type: '', description: '', date: ''})
-              Toastify({    
-                 text: `${transaction.type} Added Successfully!!!`,
-                 duration: 1500,
-                
-                 style: {
-                   background: "linear-gradient(to right, #00b09b, #96c93d)",
-                 },
-                 
-               }).showToast();
-
-              
-
-              
-        }
-    }
-
-
-       const handleUpdateClick = async (id) => {
-
-        alert('ehiwhfohwfho')
-    }
-
-      const handleUpdateSubmit = async (id) => {
-
-        const res = await axios.put(`${api}/api/v1/update-transaction/${id}`,{
-           title:transaction.title,
-           description:transaction.description,
-           category:transaction.category,
-            type:transaction.type,
-           amount:transaction.amount,
-           date:transaction.date
-        })
-        if (res.data.success) {
-              fetchAllTransaction()
-
-              setTransaction({title: '', amount: '', category: '',type: '', description: '', date: ''})
-              Toastify({    
-  text: "Income Updated Successfully!!!",
-  duration: 1500,
- 
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-  },
-  
-}).showToast();
-              
-        }
-    }
-
     useEffect(() => {
         fetchAllTransaction()
-        
 
     }, [])
+
+
     return (
         <InnerLayout>
             <h1>Add Transaction</h1>
@@ -122,9 +80,9 @@ const Income = () => {
 
                         <label for="type">Type:</label><br></br>
                         <select id="type" onChange={handleChange} value={transaction.type} name="type" required>
-                           <option>Select Type</option>
-                           <option value="income">Income</option>
-                           <option value="expense">Expanse</option>
+                            <option>Select Type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expanse</option>
                         </select><br></br>
 
                         <label for="category">Category:</label><br></br>
@@ -138,16 +96,13 @@ const Income = () => {
                         <input type="submit" value="Submit" />
                     </form>
                 </div>
-                
+
             </div>
         </InnerLayout >
 
     )
 }
 
-const IncomeStyled = styled.div`
 
-
-`
 
 export default Income

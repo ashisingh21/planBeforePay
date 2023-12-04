@@ -11,7 +11,6 @@ export const InnerLayout = styled.div`
 padding:2rem 1.5rem;
 width:100%;
 display:flex;
-gap:2rem;
 flex-direction:column;
-position:relative;
+gap:2rem;
 `;
