@@ -16,7 +16,7 @@ const TransactionContainer = (props) => {
             <p className='text-sm'>Cat: {transactionItem.category}</p>
             <p className='text-sm type' style={transactionItem.type == 'income' ? {color:'var(--color-green)',borderColor:'var(--color-green)'} :  {color:'var(--color-delete)',borderColor:'var(--color-delete)'}}>{transactionItem.type}</p>
             <p className='text-sm'>Description: {transactionItem.description}</p>
-            <p className='text-sm'>Date: {transactionItem.date}</p>
+            <p className='text-sm type date'>Date: {new Date(transactionItem.date).toDateString()}</p>
             
             <div style={{display:'flex'}}>
               <button style={{border:'none', color:'var(--color-delete)', paddingLeft:'4px'}} onClick={()=> handleDelete   (transactionItem._id)}>{trash}</button> 
